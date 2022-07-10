@@ -1,18 +1,30 @@
 package hashmap;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.HashMap;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PresidentTest {
 
-    @Test
-    void president() {
-        int numberOfStudent = 15;
-        String votes = "BACBACCACCBDEDE";
-        assertThat(solution(votes)).isEqualTo('C');
+    @ParameterizedTest
+    @MethodSource("provideStringsForIsCharacter")
+    void president(String votes, char expected) {
+        assertThat(solution(votes)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> provideStringsForIsCharacter() {
+        return Stream.of(
+                Arguments.of("BACBACCACCBDEDE", 'C'),
+                Arguments.of("CCCAAABBABDEQAD", 'A'),
+                Arguments.of("YYZZZ", 'Z')
+        );
     }
 
     private char solution(String votes) {
