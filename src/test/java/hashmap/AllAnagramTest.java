@@ -48,23 +48,27 @@ class AllAnagramTest {
     }
 
     private int findCountOfAnagram(String word1, String word2) {
-        Map<Character, Integer> fullAnaMap = makeFullAnaMap(word2);
-        Map<Character, Integer> anaMap = new HashMap<>();
-        char[] chars = word1.toCharArray();
-        for (int i = 0; i < word2.length() - 1; i++) {
-            char c =  word1.toCharArray()[i];
-            anaMap.put(c, anaMap.getOrDefault(c, 0) + 1);
-        }
+        Map<Character, Integer> slidingAnaMap = initSlidingAnaMap(word1, word2);
         int count = 0;
         int lt = 0;
+        Map<Character, Integer> fullAnaMap = makeFullAnaMap(word2);
         for (int rt = word2.length() - 1; rt < word1.length(); rt++) {
-            putRightCharacter(anaMap, chars[rt]);
-            if (anaMap.equals(fullAnaMap)) {
+            putRightCharacter(slidingAnaMap, word1.charAt(rt));
+            if (slidingAnaMap.equals(fullAnaMap)) {
                 count++;
             }
-            removeLeftCharacter(anaMap, chars[lt++]);
+            removeLeftCharacter(slidingAnaMap, word1.charAt(lt++));
         }
         return count;
+    }
+
+    private Map<Character, Integer> initSlidingAnaMap(String word1, String word2) {
+        Map<Character, Integer> anaMap = new HashMap<>();
+        for (int i = 0; i < word2.length() - 1; i++) {
+            char c =  word1.charAt(i);
+            anaMap.put(c, anaMap.getOrDefault(c, 0) + 1);
+        }
+        return anaMap;
     }
 
     private Map<Character, Integer> makeFullAnaMap(String word) {
