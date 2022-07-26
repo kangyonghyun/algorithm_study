@@ -9,10 +9,10 @@ public class Bracket {
         Scanner sc = new Scanner(System.in);
 
         Bracket bracket = new Bracket();
-        System.out.println( bracket.isProperBracket(sc.next()));
+        System.out.println( bracket.isProperBracket2(sc.next()));
     }
 
-    private String isProperBracket(String bracket) {
+    private String isProperBracket1(String bracket) {
         Stack<Character> brackets = new Stack<>();
         try {
             for (char c : bracket.toCharArray()) {
@@ -29,5 +29,24 @@ public class Bracket {
             return "YES";
         }
         return "NO";
+    }
+
+    private String isProperBracket2(String bracket) {
+        String result = "YES";
+        Stack<Character> brackets = new Stack<>();
+        for (char c : bracket.toCharArray()) {
+            if (c == '(') {
+                brackets.push(c);
+            } else {
+                if (brackets.isEmpty()) {
+                    return "NO";
+                }
+                brackets.pop();
+            }
+        }
+        if (!brackets.isEmpty()) {
+            result = "NO";
+        }
+        return result;
     }
 }
