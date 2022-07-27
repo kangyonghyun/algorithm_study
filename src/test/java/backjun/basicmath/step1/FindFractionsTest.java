@@ -13,7 +13,7 @@ class FindFractionsTest {
     @ParameterizedTest
     @MethodSource("provideXthForFindFraction")
     void fraction(int x, String expected) {
-        assertThat(solution(x)).isEqualTo(expected);
+        assertThat(findFraction(x)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideXthForFindFraction() {
@@ -31,7 +31,7 @@ class FindFractionsTest {
         );
     }
 
-    private String solution(int num) {
+    private String findFraction(int num) {
         int result = 0;
         int up = 0;
         int down = 0;
