@@ -20,31 +20,37 @@ public class CraneGame {
             moves[i] = sc.nextInt();
         }
         CraneGame craneGame = new CraneGame();
-        System.out.println(craneGame.findNumberOfDoll(N, board, M, moves));
+        System.out.println(craneGame.executeCraneGame(N, board, moves));
     }
 
-    private int findNumberOfDoll(int N, int[][] board, int M, int[] moves) {
+    private int executeCraneGame(int N, int[][] board, int[] moves) {
         Stack<Integer> dolls = new Stack<>();
-        dolls.push(0);
         int count = 0;
         for (int move : moves) {
             for (int i = 0; i < N; i++) {
-                if (board[i][move - 1] == 0) {
-                    continue;
+                int doll = board[i][move - 1];
+                drawDoll(move, board[i]);
+                if (doll != 0) {
+                    count = getCountOfDisappearedDoll(dolls, count, doll);
+                    break;
                 }
-                if (dolls.peek() != board[i][move - 1]) {
-                    dolls.push(board[i][move - 1]);
-                } else {
-                    if (!dolls.isEmpty()) {
-                        dolls.pop();
-                        count++;
-                    }
-                }
-                board[i][move - 1] = 0;
-                break;
             }
         }
         return count * 2;
+    }
+
+    private void drawDoll(int move, int[] board) {
+        board[move - 1] = 0;
+    }
+
+    private int getCountOfDisappearedDoll(Stack<Integer> dolls, int count, int doll) {
+        if (!dolls.isEmpty() && doll == dolls.peek()) {
+            dolls.pop();
+            count++;
+        } else {
+            dolls.push(doll);
+        }
+        return count;
     }
 
 }
