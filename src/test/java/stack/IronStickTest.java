@@ -29,6 +29,7 @@ class IronStickTest {
             }
         }
         return count;
+
     }
 
 }
