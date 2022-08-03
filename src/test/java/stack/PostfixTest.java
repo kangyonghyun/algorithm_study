@@ -26,18 +26,18 @@ class PostfixTest {
                     right = repository.pop();
                     left = repository.pop();
                 }
-                if (c == '+') {
-                    repository.push(left + right);
-                }
-                if (c == '-') {
-                    repository.push(left - right);
-                }
-                if (c == '*') {
-                    repository.push(left * right);
-                }
-                if (c == '/') {
-                    repository.push(left - right);
-                }
+            }
+            if (c == '+') {
+                repository.push(left + right);
+            }
+            if (c == '-') {
+                repository.push(left - right);
+            }
+            if (c == '*') {
+                repository.push(left * right);
+            }
+            if (c == '/') {
+                repository.push(left - right);
             }
         }
         return repository.pop();
