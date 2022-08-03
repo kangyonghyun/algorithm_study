@@ -1,20 +1,14 @@
 package stack;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-
+import java.util.Scanner;
 import java.util.Stack;
 
-import static org.assertj.core.api.Assertions.*;
+public class IronStick {
 
-class IronStickTest {
-
-    @ParameterizedTest
-    @CsvSource({"()(((()())(())()))(()), 17", "(((()(()()))(())()))(()()), 24"})
-    void cut(String bracket, int expected) {
-        assertThat(getCountOfStick(bracket)).isEqualTo(expected);
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        IronStick ironStick = new IronStick();
+        System.out.println(ironStick.getCountOfStick(sc.next()));
     }
 
     private int getCountOfStick(String input) {
