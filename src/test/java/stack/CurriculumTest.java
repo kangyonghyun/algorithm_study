@@ -3,6 +3,7 @@ package stack;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -11,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CurriculumTest {
 
     @ParameterizedTest
-    @CsvSource({"CBA, CBDAGE, YES", "CBA, DCEAGB, NO"})
+    @CsvSource({"CBA, CBDAGE, YES", "CBA, DCEAGB, NO", "ABCDEG, ABCDEG, YES"})
     void plan(String priority, String curriculums, String expected) {
         assertThat(planCurriculum(priority, curriculums)).isEqualTo(expected);
     }
@@ -19,17 +20,19 @@ class CurriculumTest {
     private String planCurriculum(String priority, String curriculums) {
         Queue<Character> check = new LinkedList<>();
         for (Character ranking : priority.toCharArray()) {
-            check.add(ranking);
+            check.offer(ranking);
         }
         for (Character curriculum : curriculums.toCharArray()) {
-            if (curriculum == check.peek()) {
-                check.poll();
-            }
-            if (check.isEmpty()) {
-                return "YES";
+            if (check.contains(curriculum)) {
+                if (check.poll() != curriculum) {
+                    return "NO";
+                }
             }
         }
-        return "NO";
+        if (!check.isEmpty()) {
+            return "NO";
+        }
+        return "YES";
     }
 
 }

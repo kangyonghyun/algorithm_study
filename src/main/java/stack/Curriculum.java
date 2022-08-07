@@ -15,16 +15,18 @@ public class Curriculum {
     private String planCurriculum(String priority, String curriculums) {
         Queue<Character> check = new LinkedList<>();
         for (Character ranking : priority.toCharArray()) {
-            check.add(ranking);
+            check.offer(ranking);
         }
         for (Character curriculum : curriculums.toCharArray()) {
-            if (curriculum == check.peek()) {
-                check.poll();
-            }
-            if (check.isEmpty()) {
-                return "YES";
+            if (check.contains(curriculum)) {
+                if (check.poll() != curriculum) {
+                    return "NO";
+                }
             }
         }
-        return "NO";
+        if (!check.isEmpty()) {
+            return "NO";
+        }
+        return "YES";
     }
 }
