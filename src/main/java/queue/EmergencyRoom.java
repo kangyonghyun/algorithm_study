@@ -23,13 +23,12 @@ public class EmergencyRoom {
         }
         int count = 0;
         Arrays.sort(risks, Comparator.reverseOrder());
-        for (int risk : risks) {
-            while (numberOfPatient == patients.size()) {
+        for (int maxRisk : risks) {
+            while (!patients.isEmpty()) {
                 Patient patient = patients.poll();
-                if (patient.getRisk() == risk && patient.getOrder() == order) {
+                if (patient.isMaxRisk(maxRisk) && patient.isOrder(order)) {
                     return ++count;
-                } else if (patient.getRisk() == risk) {
-                    numberOfPatient--;
+                } else if (patient.isMaxRisk(maxRisk)) {
                     count++;
                     break;
                 } else {
@@ -40,21 +39,50 @@ public class EmergencyRoom {
         return count;
     }
 
+    private int getTreatmentOrder1(int numberOfPatient, int order, Integer[] risks) {
+        Queue<Patient> patients = new LinkedList<>();
+        for (int i = 0; i < numberOfPatient; i++) {
+            patients.offer(new Patient(risks[i], i));
+        }
+        int count = 0;
+        while (!patients.isEmpty()) {
+            Patient findPatient = patients.poll();
+            for (Patient patient : patients) {
+                if (patient.isLessThanRisk(findPatient)) {
+                    patients.offer(findPatient);
+                    findPatient = null;
+                    break;
+                }
+            }
+            if (findPatient != null) {
+                count++;
+                if (findPatient.isOrder(order)) {
+                    return count;
+                }
+            }
+        }
+        return count;
+    }
+
     static class Patient {
-        int risk;
-        int order;
+        private final int risk;
+        private final int order;
 
         public Patient(int risk, int order) {
             this.risk = risk;
             this.order = order;
         }
 
-        public int getRisk() {
-            return risk;
+        public boolean isOrder(int order) {
+            return this.order == order;
         }
 
-        public int getOrder() {
-            return order;
+        public boolean isLessThanRisk(Patient findPatient) {
+            return this.risk > findPatient.risk;
+        }
+
+        public boolean isMaxRisk(int maxRisk) {
+            return this.risk == maxRisk;
         }
     }
 }
