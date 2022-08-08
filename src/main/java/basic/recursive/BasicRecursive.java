@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class RecursiveFunction {
+public class BasicRecursive {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        RecursiveFunction function = new RecursiveFunction();
+        BasicRecursive function = new BasicRecursive();
 
         for (int result : function.solution(sc.nextInt())) {
             System.out.print(result + " ");

@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class RecursiveFunctionTest {
+class BasicRecursiveTest {
 
     @ParameterizedTest
     @ValueSource(ints = 3)
