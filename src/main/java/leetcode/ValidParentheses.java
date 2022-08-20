@@ -4,6 +4,7 @@ import java.util.Stack;
 
 public class ValidParentheses {
     public boolean isValid(String input) {
+
         Stack<Character> values = new Stack<>();
         for (char c : input.toCharArray()) {
             if (c == '(' || c == '[' || c == '{') {
@@ -26,4 +27,5 @@ public class ValidParentheses {
         }
         return values.isEmpty();
     }
+
 }
