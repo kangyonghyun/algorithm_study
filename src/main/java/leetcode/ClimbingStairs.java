@@ -1,4 +1,4 @@
-package basic.dynamic;
+package leetcode;
 
 public class ClimbingStairs {
     public int climbStairs(int n) {

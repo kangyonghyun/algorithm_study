@@ -1,4 +1,4 @@
-package basic.dynamic;
+package leetcode;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
