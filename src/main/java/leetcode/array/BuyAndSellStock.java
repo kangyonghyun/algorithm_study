@@ -1,5 +1,5 @@
 package leetcode.array;
-최
+
 public class BuyAndSellStock {
     private int getMaxProfit(int[] prices) {
         int maxProfit = 0;
