@@ -1,15 +1,18 @@
-package basic.slidingwindow;
+package basic.twopointers;
 
-import java.util.Scanner;
+import org.junit.jupiter.api.Test;
 
-public class ConsecutiveNaturalNumbers {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        System.out.println(getNumberOfCases(n));
+import static org.assertj.core.api.Assertions.assertThat;
+
+class ConsecutiveNaturalNumbersTest {
+
+    @Test
+    void solution() {
+        int n = 15;
+        assertThat(getNumberOfCases(n)).isEqualTo(3);
     }
 
-    private static int getNumberOfCases(int n) {
+    private int getNumberOfCases(int n) {
         int count = 0;
         int sum = 0;
         int left = 1;
@@ -25,4 +28,5 @@ public class ConsecutiveNaturalNumbers {
         }
         return count;
     }
+
 }
