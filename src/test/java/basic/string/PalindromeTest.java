@@ -8,9 +8,9 @@ class PalindromeTest {
 
     @Test
     void solution() {
-        assertThat(isPalindrome1("gooG")).isEqualTo("YES");
-        assertThat(isPalindrome1("goosG")).isEqualTo("NO");
-        assertThat(isPalindrome1("Level")).isEqualTo("YES");
+        assertThat(isPalindrome2("gooG")).isEqualTo("YES");
+        assertThat(isPalindrome2("goosG")).isEqualTo("NO");
+        assertThat(isPalindrome2("Level")).isEqualTo("YES");
     }
 
     private String isPalindrome(String word) {
@@ -38,6 +38,14 @@ class PalindromeTest {
             }
         }
         return "YES";
+    }
+
+    private String isPalindrome2(String word) {
+        word = word.toLowerCase();
+        if (word.equals(new StringBuilder(word).reverse().toString())) {
+            return "YES";
+        }
+        return "NO";
     }
 
 }
