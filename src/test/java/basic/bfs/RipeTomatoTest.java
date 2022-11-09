@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class RipeTomatoTest {
 
     @Test
@@ -16,8 +18,7 @@ class RipeTomatoTest {
                 {0, 0, 0, 0, -1, 1}
         };
         TomatoBox tBox = new TomatoBox(6, 4, box);
-        int minDateForRipeTomatoes = tBox.getMinDateForRipeTomatoes();
-        System.out.println(minDateForRipeTomatoes);
+        assertThat(tBox.getMinDateForRipeTomatoes()).isEqualTo(4);
     }
 
     static class TomatoBox {
@@ -27,6 +28,7 @@ class RipeTomatoTest {
         int[] dx = {-1, 0, 1, 0};
         int[] dy = {0, 1, 0, -1};
         int[][] dates;
+        Queue<Tomato> que = new LinkedList<>();
 
         public TomatoBox(int m, int n, int[][] box) {
             this.m = m;
@@ -36,7 +38,12 @@ class RipeTomatoTest {
         }
 
         public int getMinDateForRipeTomatoes() {
-            Queue<Tomato> que = new LinkedList<>();
+            setRipeTomato();
+            BFS();
+            return getMinDate();
+        }
+
+        private void setRipeTomato() {
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < m; j++) {
                     if (box[i][j] == 1) {
@@ -44,7 +51,9 @@ class RipeTomatoTest {
                     }
                 }
             }
+        }
 
+        private void BFS() {
             while (!que.isEmpty()) {
                 Tomato ripeTomato = que.poll();
                 for (int i = 0; i < 4; i++) {
@@ -57,7 +66,9 @@ class RipeTomatoTest {
                     }
                 }
             }
+        }
 
+        private int getMinDate() {
             int max = Integer.MIN_VALUE;
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < m; j++) {
