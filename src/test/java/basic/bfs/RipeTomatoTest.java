@@ -39,8 +39,7 @@ class RipeTomatoTest {
 
         public int getMinDateForRipeTomatoes() {
             setRipeTomato();
-            BFS();
-            return getMinDate();
+            return BFS();
         }
 
         private void setRipeTomato() {
@@ -53,7 +52,7 @@ class RipeTomatoTest {
             }
         }
 
-        private void BFS() {
+        private int BFS() {
             while (!que.isEmpty()) {
                 Tomato ripeTomato = que.poll();
                 for (int i = 0; i < 4; i++) {
@@ -66,6 +65,7 @@ class RipeTomatoTest {
                     }
                 }
             }
+            return getMinDate();
         }
 
         private int getMinDate() {
