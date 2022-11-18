@@ -1,37 +1,20 @@
 package basic.greedy;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import java.util.*;
 
-import static org.assertj.core.api.Assertions.*;
-
-class ScheduleTest {
-
-    @Test
-    void solution() {
-        int n = 6;
+public class ProfitSchedule {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
         List<Lecture> lectures = new ArrayList<>();
-        lectures.add(new Lecture(50, 2));
-        lectures.add(new Lecture(20, 1));
-        lectures.add(new Lecture(40, 2));
-        lectures.add(new Lecture(60, 3));
-        lectures.add(new Lecture(30, 3));
-        lectures.add(new Lecture(30, 1));
-
-        int maxPay = getMaxPay(n, lectures);
-        assertThat(maxPay).isEqualTo(150);
+        for (int i = 0; i < n; i++) {
+            lectures.add(new Lecture(sc.nextInt(), sc.nextInt()));
+        }
+        System.out.println(getMaxPay(n, lectures));
     }
 
-    private int getMaxPay(int n, List<Lecture> lectures) {
-        Collections.sort(lectures, new Comparator<Lecture>() {
-            @Override
-            public int compare(Lecture o1, Lecture o2) {
-                return o2.day - o1.day;
-            }
-        });
-
+    private static int getMaxPay(int n, List<Lecture> lectures) {
+        Collections.sort(lectures, (o1, o2) -> o2.day - o1.day);
         int result = 0;
         int max = Integer.MIN_VALUE;
         for (Lecture lecture : lectures) {
@@ -39,7 +22,6 @@ class ScheduleTest {
                 max = lecture.day;
             }
         }
-
         PriorityQueue<Integer> pQue = new PriorityQueue<>(Collections.reverseOrder());
         int j = 0;
         for (int i = max; i >= 1; i--) {
@@ -65,5 +47,4 @@ class ScheduleTest {
             this.day = day;
         }
     }
-
 }
