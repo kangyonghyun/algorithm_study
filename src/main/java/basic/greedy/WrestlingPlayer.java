@@ -17,22 +17,17 @@ public class WrestlingPlayer {
     }
 
     public int getNumberOfPlayers(List<Player> players) {
-        int result = 0;
+        int count = 0;
         Collections.sort(players, (o1, o2) -> o2.height - o1.height);
 
-        for (int i = 0; i < players.size(); i++) {
-            boolean flag = true;
-            for (int j = i - 1; j >= 0; j--) {
-                if (players.get(i).weight < players.get(j).weight) {
-                    flag = false;
-                    break;
-                }
-            }
-            if (flag) {
-                result++;
+        int max = Integer.MIN_VALUE;
+        for (Player player : players) {
+            if (player.weight > max) {
+                max = player.weight;
+                count++;
             }
         }
-        return result;
+        return count;
     }
 
     static class Player {

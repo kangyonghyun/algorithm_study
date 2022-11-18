@@ -10,6 +10,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class WrestlingPlayerTest {
 
+    /**
+     * 그리디 알고리즘 (탐욕 알고리즘)
+     * 키로 내림차순 정렬
+     * 몸무게를 비교하여 맥스인 몸무게
+     */
+
     @Test
     void count() {
         List<Player> players = new ArrayList<>();
@@ -22,40 +28,19 @@ class WrestlingPlayerTest {
         assertThat(getNumberOfPlayers2(players)).isEqualTo(3);
     }
 
-    public int getNumberOfPlayers(List<Player> players) {
-        int result = 0;
-        Collections.sort(players, (o1, o2) -> o2.height - o1.height);
-
-        for (int i = 0; i < players.size(); i++) {
-            boolean flag = true;
-            for (int j = i - 1; j >= 0; j--) {
-                if (players.get(i).weight < players.get(j).weight) {
-                    flag = false;
-                    break;
-                }
-            }
-            if (flag) {
-                result++;
-            }
-        }
-        return result;
-    }
-
     public int getNumberOfPlayers2(List<Player> players) {
-        int result = 0;
+        int count = 0;
         Collections.sort(players, (o1, o2) -> o2.height - o1.height);
 
         int max = Integer.MIN_VALUE;
         for (Player player : players) {
             if (player.weight > max) {
                 max = player.weight;
-                result++;
+                count++;
             }
         }
-        return result;
+        return count;
     }
-
-
 
     static class Player {
         int height;
