@@ -39,8 +39,9 @@ class PresidentTest {
         int max = Integer.MIN_VALUE;
         char result = '\u0000';
         for (char key : resultMap.keySet()) {
-            if (resultMap.get(key) >= max) {
-                max = resultMap.get(key);
+            int count = resultMap.get(key);
+            if (count >= max) {
+                max = count;
                 result = key;
             }
         }
