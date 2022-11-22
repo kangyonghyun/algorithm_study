@@ -1,14 +1,24 @@
 package basic.stack;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Stack;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CraneGameTest {
+
+    /**
+     * 2차원 배열 x Stack 을 이용한 인형뽑기 문제
+     * 움직이는 위치에 따라 2차원 배열에 숫자를 뽑고 0 으로 만들어줌
+     * 인형이 없을 경우 0 이기 때문에 보드의 수만 큼 for 문을 돌려줘야
+     * 0 이 아니라면 Stack 에 넣어주는데
+     * 만약, Stack 에 같은 숫자가 겹치면 값을 넣어주지 않고 Stack 맨위숫자를 빼줌
+     * 같은 숫자가 겹치는 경우, count 증가
+     * 반복문을 빠져나오고 moves 차례대로 진행
+     * 최종 사라진 인형의 개수는 count * 2
+     */
+
     @Test
     void draw() {
         int N = 5;
@@ -31,7 +41,7 @@ class CraneGameTest {
         for (int move : moves) {
             for (int i = 0; i < N; i++) {
                 int doll = board[i][move - 1];
-                drawDoll(move, board[i]);
+                board[i][move - 1] = 0;
                 if (doll != 0) {
                     count = getCountOfDisappearedDoll(dolls, count, doll);
                     break;
@@ -39,10 +49,6 @@ class CraneGameTest {
             }
         }
         return count * 2;
-    }
-
-    private void drawDoll(int move, int[] board) {
-        board[move - 1] = 0;
     }
 
     private int getCountOfDisappearedDoll(Stack<Integer> dolls, int count, int doll) {
