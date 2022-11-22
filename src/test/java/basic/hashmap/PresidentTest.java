@@ -1,9 +1,7 @@
 package basic.hashmap;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.HashMap;
@@ -12,6 +10,12 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PresidentTest {
+
+    /**
+     * HashMap 이용 문제
+     * key : 학급 회장 기호 / value : 몇번 불렸는지 횟수 저장
+     * map 에서 가장 많은 횟수가 나온 학급 회장 기호 출력 (가장 높은 value 값은 어떤 키 ?)
+     */
 
     @ParameterizedTest
     @MethodSource("provideStringsForIsCharacter")
