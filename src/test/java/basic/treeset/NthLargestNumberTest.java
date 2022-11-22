@@ -1,14 +1,20 @@
 package basic.treeset;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class NthLargestNumberTest {
+
+    /**
+     *  n 번째 크기의 카드의 합 구하기
+     *  TreeSet 을 사용해서 중복 숫자 제거, 정렬에 유리한 구조로 만듬
+     *  오름차순 정렬 TreeSet 에 3개 카드의 합을 모두 저장
+     *  오름차순 정렬된 TreeSet 에 n 번쨰 크기를 구함
+     *  TreeSet 은 Set 의 특성 + 이진탐색트리 구조 => 정렬, 검색에 좋고 추가,삭제에 불리
+     */
 
     @Test
     void nthNumber() {
@@ -45,12 +51,12 @@ class NthLargestNumberTest {
             int sum = 0;
             int first = cards[i];
             int second = cards[i + 1];
-            for (int j = i+2; j < cards.length; j++) {
+            for (int j = i + 2; j < cards.length; j++) {
                 sum = first + second + cards[j];
                 results.add(sum);
             }
         }
-        return results.get(k-1);
+        return results.get(k - 1);
     }
 
 }
