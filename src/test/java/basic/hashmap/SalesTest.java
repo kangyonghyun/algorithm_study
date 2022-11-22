@@ -11,6 +11,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class SalesTest {
 
+    /**
+     * 특정 구간사이의 매출액 종류 구하기 (동일한 경우 제외)
+     * 매출액 종류를 특정 구간사이 - 1 만큼 맵에 넣고
+     * for 문 반복 (매출액 종류 수 만큼)
+     * 오른쪽 매출액 넣고 맵의 사이즈를 리스트에 넣는다. (맵은 동일한 매출액일 경우 제외)
+     * 왼쪽 매출액은 -카운트 (0이면 제거, lt++)
+     * 특정 구간별 매출액의 종류를 리스트에 넣어 반환 (맵의 사이즈)
+     * 슬라이딩 윈도우 방식, 맵
+     */
+
     @Test
     void sales() {
         int days = 7;
